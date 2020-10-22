@@ -1,0 +1,29 @@
+button {
+  font-size: 42px;
+  padding: 20px;
+}
+
+#message {
+  font-size: 42px;
+}
+
+.columns {
+  display: flex;
+}
+
+.column {
+  padding: 20px;
+}
+
+#p5_loading {
+  font-size: 48px;
+}
+
+.handsfree-video,
+.handsfree-canvas {
+  display: none
+}
+
+.handsfree-debug {
+  width: 100%
+}
