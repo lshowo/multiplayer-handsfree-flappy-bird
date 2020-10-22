@@ -19,11 +19,19 @@ button {
   font-size: 48px;
 }
 
-.handsfree-video,
 .handsfree-canvas {
   display: none
 }
 
+#debugger {
+  position: relative;
+}
+
+.handsfree-video,
 .handsfree-debug {
-  width: 100%
+  width: 100%;
+  height: auto;
+  top: 0;
+  left: 0;
+  position: absolute;
 }
