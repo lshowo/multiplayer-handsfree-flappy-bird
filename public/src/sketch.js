@@ -27,7 +27,6 @@ function setup() {
   //开启监听start事件
   socket.on('startGame', function (isClicked) {
     console.log('start received', isClicked);
-    console.log('1111111111');
     isGameOver = !isClicked; 
     print('isGameOver',isGameOver)
   })
