@@ -12,6 +12,8 @@ let posenet
 let video
 let song
 let isSongPlaying = false
+let timerValue = 10
+let startCountdown = false
 
 function preload() {
   birdImg = loadImage('assets/grumpy-bird.png')
@@ -29,60 +31,90 @@ function setup() {
   socket.on('startGame', function (isClicked) {
     console.log('start received', isClicked);
     isGameOver = !isClicked; 
-    print('isGameOver',isGameOver)
+    startCountdown = Boolean(isClicked);
   })
   bird = new Bird() //create a new bird
   pipes.push(new Pipe())
+  textAlign(CENTER, CENTER);
+  textSize(32);
+  setInterval(timeIt, 1000);
 }
 
-function draw() {
-  if (!isGameOver){ //isGameOver == false
-  background('#70c5ce')
-  // Loop through each pipe
-  for (let i = pipes.length - 1; i >= 0; i--) {
-    if (isGameOver) {
-      pipes[i].draw()
-    } else {
-      pipes[i].update()
-    }
-    // Delete when offscreen
-    if (pipes[i].isOffscreen()) {
-      pipes.splice(i, 1)
-    }
-  }
-  // Create a new pipe in a fixed frequency
-  if (frameCount % 75 === 0 && !isGameOver) {
-    pipes.push(new Pipe())
-  }
-  if (isGameOver) {
-    bird.draw()
-  } else {
-    bird.update()
-  }
-  // Handle gameover restart
-  if (isGameOver && !isCountingDown) { //游戏结束&结束计数
-    console.log('gameover ~');
-    //isCountingDown = true
-    stopSong()
-    background(200);
-    textSize(64);
-    text(score, 320, 240, 140, 160);
-    setTimeout(()=>{
-      refresh()
-    }, 1000)
+function draw(){
+  if (!isGameOver){
+    if (startCountdown){ //倒计时5s
+      background(220);
+      textSize(32);
+      text('step away from the screen'+'\n'+'spread your arms', width/2, height/2+70)
+      textSize(100);
+      if (timerValue > 0){
+        text(timerValue, width/2, height/2);
+      }else{
+        text('Start!!!!', width/2, height/2+15);
+        setTimeout(()=>{
+          console.log('🔥ready to start!')
+          startCountdown = false
+        }, 1500)
+      }
+    }else{ //开始游戏
+      background('#70c5ce')
+      // Loop through each pipe
+      for (let i = pipes.length - 1; i >= 0; i--) {
+        if (isGameOver) {
+          pipes[i].draw()
+        } else {
+          pipes[i].update()
+        }
+        // Delete when offscreen
+        if (pipes[i].isOffscreen()) {
+          pipes.splice(i, 1)
+        }
+      }
+      // Create a new pipe in a fixed frequency
+      if (frameCount % 75 === 0 && !isGameOver) {
+        pipes.push(new Pipe())
+      }
+      if (isGameOver) {
+        bird.draw()
+      } else {
+        bird.update()
+      }
+      // Handle gameover restart
+      if (isGameOver && !isCountingDown) { //游戏结束&结束计数
+        console.log('gameover ~');
+        //isCountingDown = true
+        stopSong()
+        background(200);
+        text(score);
+        //刷新
+        setTimeout(()=>{
+          refresh()
+        }, 1000)
 
-    // setTimeout(() => {
-    //   playSong()
-    //   $message.innerHTML = ''
-    //   pipes = []
-    //   bird.y = height / 2
-    //   isCountingDown = false
-    //   //isGameOver = false
-    //   score = 0
-    //   $score.innerHTML = '0'
-    // }, 1000)
+        // setTimeout(() => {
+        //   playSong()
+        //   $message.innerHTML = ''
+        //   pipes = []
+        //   bird.y = height / 2
+        //   isCountingDown = false
+        //   //isGameOver = false
+        //   score = 0
+        //   $score.innerHTML = '0'
+        // }, 1000)
+      }
+    }
+}
+}
+
+function timeIt() {
+  if (timerValue > 0) {
+    timerValue--;
   }
 }
+
+function refresh(){
+  isGameOver = true
+  isCountingDown = false
 }
 
 function playSong() {
@@ -95,9 +127,4 @@ function playSong() {
 function stopSong() {
   isSongPlaying = false
   song.stop()
-}
-
-function refresh(){
-  isGameOver = true
-  isCountingDown = false
 }
