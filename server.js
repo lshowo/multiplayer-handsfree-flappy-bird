@@ -1,5 +1,6 @@
 // assign our port number to be whatever heroku give us OR the dafault 3000
 var PORT = process.env.PORT || 3000;
+var serveStatic = require('serve-static')
 const cors = require('cors')
 const express = require('express'); //引入express框架
 const app = express();  //创建网站服务器
