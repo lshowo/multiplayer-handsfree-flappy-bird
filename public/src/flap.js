@@ -65,7 +65,8 @@ function keyPressed() {
 var socket;
 isClicked = 0 //开始标志位
  document.querySelector('#start-button').addEventListener('click', () => {
-  socket = io.connect('http://localhost:3000'); //连接到server
+  //socket = io.connect('http://localhost:3000'); 
+  socket = io.connect('https://multiplayer-handsfree-flappy-b.herokuapp.com/');
   socket.emit('clicked', isClicked); //发送已点击
   console.log('sent clicked');
 })

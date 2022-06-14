@@ -23,7 +23,8 @@ function setup() {
   let canvas = createCanvas(640, 480) 
   canvas.parent('sketch-container')
   //新建一个socket连接到server
-  socket = io.connect('http://localhost:3000'); 
+  //socket = io.connect('http://localhost:3000'); 
+  socket = io.connect('https://multiplayer-handsfree-flappy-b.herokuapp.com/');
   //开启监听start事件
   socket.on('startGame', function (isClicked) {
     console.log('start received', isClicked);
