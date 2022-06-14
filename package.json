@@ -21,7 +21,6 @@
   },
   "homepage": "https://github.com/lshowo/handsfree-flappy-bird#readme",
   "engine": {
-    //"node": "14.x"
     "node": "18.0.0"
   },
   "dependencies": {
