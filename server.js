@@ -14,11 +14,11 @@ function listen() {
     console.log('Example app listening at http://' + host + ':' + port);
 }
 app.use(cors());
-//app.use(express.static('public'));
+app.use(express.static('public'));
 //app.use('', express.static('./'))
 //app.use('/', serveStatic(path.join(__dirname, '/public')));
 //app.use('', express.static('./public'))
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'public')));
 
 //var io = require('socket.io')(server); //创建服务器io对象
 var io = require('socket.io')(server, { serveClient: false })
