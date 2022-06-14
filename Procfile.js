@@ -1,2 +1,2 @@
-// tell heruko the command to run the server 
+// deloy in heruko
 web: node server.js
