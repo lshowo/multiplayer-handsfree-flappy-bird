@@ -4,8 +4,8 @@ class Bird {
     this.x = 64
     this.y = height / 2
     this.width = 32
-    this.gravity = 0.3 //g
-    this.lift = -10 //a
+    this.gravity = 0.5 //g
+    this.lift = -16 //a
     this.liftFromGround = -12
     this.velocity = 0 //v
   }

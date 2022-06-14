@@ -20,16 +20,18 @@ button {
 }
 
 .handsfree-canvas {
-  display: none
+  display: none;
 }
 
 #debugger {
+  width: 100%;
   position: relative;
 }
 
 .handsfree-video,
 .handsfree-debug {
-  width: 100%;
+  /* width: 100%; */
+  width: 600px;
   height: auto;
   top: 0;
   left: 0;

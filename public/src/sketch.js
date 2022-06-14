@@ -22,11 +22,11 @@ function preload() {
 
 var socket; //创建一个 socket 对象
 function setup() {
-  let canvas = createCanvas(640, 480) 
+  let canvas = createCanvas(700, 480) 
   canvas.parent('sketch-container')
   //新建一个socket连接到server
-  //socket = io.connect('http://localhost:3000'); 
-  socket = io.connect('https://multiplayer-handsfree-flappy-b.herokuapp.com/');
+  socket = io.connect('http://localhost:3000'); 
+  //socket = io.connect('https://multiplayer-handsfree-flappy-b.herokuapp.com/');
   //开启监听start事件
   socket.on('startGame', function (isClicked) {
     console.log('start received', isClicked);
@@ -59,7 +59,7 @@ function draw(){
     }else{ //开始游戏
       background('#70c5ce')
       // Loop through each pipe
-      for (let i = pipes.length - 1; i >= 0; i--) {
+      for (let i = pipes.length - 6; i >= 0; i--) {
         if (isGameOver) {
           pipes[i].draw()
         } else {
