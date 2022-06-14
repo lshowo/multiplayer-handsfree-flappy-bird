@@ -1,0 +1,27 @@
+{
+  "name": "multiplayer-handsfree-flappy-bird",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lshowo/handsfree-flappy-bird.git"
+  },
+  "keywords": [
+    "qazwsxedc"
+  ],
+  "author": "shanghao",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lshowo/handsfree-flappy-bird/issues"
+  },
+  "homepage": "https://github.com/lshowo/handsfree-flappy-bird#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "socket.io": "^4.5.1"
+  }
+}
