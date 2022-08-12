@@ -1,4 +1,7 @@
 let pipeBorderWidth = 2 
+let username;
+var socket;
+isClicked = 0 //开始标志位
 
 class Pipe {
   constructor() {
@@ -28,6 +31,9 @@ class Pipe {
       score++
       this.hasScored = true
       $score.innerHTML = score
+      //发送分数给server
+      socket.emit('updateScore', score, username); 
+      console.log(score, username);
     }
   }
 

@@ -5,7 +5,8 @@ let handsfree = new Handsfree({
   posenet: true,
   feedback: {
     enabled: true,
-    $target: document.querySelector('#debugger')
+    //$target: document.querySelector('#debugger')
+    $target: document.querySelector('#sketch-container')
   }
 })
 
@@ -59,25 +60,10 @@ function keyPressed() {
   }
 }
 
-/**
- * Start things
- */
-var socket;
-isClicked = 0 //开始标志位
- document.querySelector('#start-button').addEventListener('click', () => {
-  //socket = io.connect('http://localhost:3000'); 
-  socket = io.connect('https://multiplayer-handsfree-flappy-b.herokuapp.com/');
-  socket.emit('clicked', isClicked); //发送已点击
-  console.log('sent clicked');
-})
 
-socket.on('startCam',  //接收到开启摄像头
-  function(isClicked){
-    print('received startCam', isClicked)
-    if (isClicked){
-      $message.innerHTML = 'Loading PoseNet'
-      playSong()
-      handsfree.start()
-      document.querySelector('#button-wrap').style.display = 'none'
-    }
+document.querySelector('#update-nickname').addEventListener('click', () => {
+  // $message.innerHTML = 'Loading PoseNet'
+  playSong()
+  handsfree.start()
+  // document.querySelector('#button-wrap').style.display = 'none'
 })

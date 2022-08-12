@@ -17,29 +17,32 @@
 
   <body>
     <div class="columns">
+
       <div class="column">
-        <div id="sketch-container"></div>
-      </div>
-      <div class="column">
-        <h1>Score: <span id="score">0</span></h1>
-        <div id="message"></div>
-        <div id="button-wrap">
-          <p>
-            <strong>How to play:</strong> Raise your wrists above shoulder level and then back down. It's tricky, more
-            natural controls coming soon 🐦
-          </p>
-          <p>
-            Song starts when you hit space or start webcam 🎶
-          </p>
-          <p>
-            <button id="start-button">Start Webcam</button>
-          </p>
-          <p>(or press space to flap without the webcam)</p>
-          <p>
-              <!-- <a href="https://glitch.com/edit/#!/flappy-pose?path=README.md:1:0">View the source</a> -->
-          </p>
+        <div id="sketch-container">
+          <div id="debugger" class="handsfree-video"></div>
         </div>
-        <div id="debugger" class="handsfree-video"></div>
+      </div>
+
+    <div class="my-info">
+      <div class="nickname">
+        <input id="nickname-input" maxlength="18"></input>
+        <button id="update-nickname">Update nickname</button>
+        </div>
+      <div class="my-score">
+        <p id="score-label">My Score: <span id="score">0</span></p>
+      </div>
+    </div>
+
+      <div class="scoreboard">
+        <h2 class="score-title">Live Leaderboard</h2>
+        <div class="top-score">
+        <p id="top-label"></p>
+        </div>
+        <ul id="score-list" class="score-list">
+        </ul>
+      </div>
+       
       </div>
     </div>
     

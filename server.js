@@ -20,31 +20,72 @@ app.use(express.static('public'));
 
 var io = require('socket.io')(server); //创建服务器io对象
 
+var scores = []; //对象数组 存放client的id与对应成绩
+
+let find = 0;
+
 //收到client的连接,
 io.sockets.on('connection',
     function (socket) { //收到client的socket,
         console.log("We have a new client: " + socket.id);
+        var score = new User(socket.id, '', 0); 
+        //console.log(score);
+        scores.push(score);
+        console.log(scores);
 
-        socket.on('clicked', 
-        function(isClicked){ //收到flap.js的clicked
-            isClicked = 1
-            console.log('received clicked', isClicked);
-            startGame(isClicked) //start game (sketch)
-            startCam(isClicked) //start game (flap)
-        });
-    
-        socket.on('disconnect', function () {
-            console.log("Client has disconnected");
+        //成绩更新
+        socket.on('updateScore', function (score, username) {
+            find = 0;
+            console.log('🌟', score, 'a new score received from: ', socket.id);
+            for (var i in scores){
+                if(scores[i].username == username){
+                    //scores[i].username = username;
+                    scores[i].score = score; 
+                    find = 1; 
+                    break;
+                }
+            }
+            if(!find){
+                console.log('addddddddd');
+                scores[scores.length-1].username = username;
+                scores[scores.length-1].score = score;
+            }
+
+            //console.log(scores);
+            displayScore(scores);
+            
+
         });
     }
 );
  
-function startGame(click){
-    io.sockets.emit('startGame', click);
-    console.log('sent startGame', click)
+
+function displayScore(){
+    scores.sort(sortBy('score',false));
+    io.sockets.emit('displayScore', scores);
 }
 
-function startCam(click){
-    io.sockets.emit('startCam', click);
-    console.log('sent startCam', click)
+function User(id, username, score){
+    this.id = id;
+    this.username = username;
+    this.score = score;
+}
+
+function sortBy(attr,rev){
+    if(rev ==  undefined){
+        rev = 1;
+    }else{
+        rev = (rev) ? 1 : -1;
+    }
+    return function(a,b){
+        a = a[attr];
+        b = b[attr];
+        if(a < b){
+            return rev * -1;
+        }
+        if(a > b){
+            return rev * 1;
+        }
+        return 0;
+    }
 }

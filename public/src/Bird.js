@@ -38,7 +38,6 @@ class Bird {
       this.y = height
       this.velocity = 0
     }
-
     this.draw()
   }
 }
